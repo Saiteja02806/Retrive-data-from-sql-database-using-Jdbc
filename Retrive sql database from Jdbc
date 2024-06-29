@@ -1,0 +1,43 @@
+import java.sql.*;
+
+class RetriveEx{
+	public static void main(String ar[])
+	{
+		
+		String driver="oracle.jdbc.driver.OracleDriver";
+       String url="jdbc:oracle:thin:hr/hr@localhost:1521:XE";
+
+       String username ="SYSTEM";
+
+        String password ="saiteja";
+		try {
+			
+			//step-1=driver
+			Class.forName(driver);
+			//step-2=establishing the connection 
+			Connection con=DriverManager.getConnection(url,username,password);
+			//step-3=statement 
+			Statement stmt=con.createStatement();
+			//step-4=executing the query.
+			ResultSet res=stmt.executeQuery("select * from student");
+			while(res.next())
+			{
+				System.out.println(res.getInt(1));
+				System.out.println(res.getString(2));
+			}
+			//executeUpdate =IS useful for update the information to the driver.
+			//step-5=connection close 
+			con.close();
+			
+		}
+		
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		
+		//make =database name 
+		//home=create table home(rno int ,product varchar(100));
+	}
+	
+}
